@@ -34,8 +34,8 @@ export const go = link => {
 
     if ( ! routes[route]) link = route = '/books';
 
-    outlet.setAttribute('route', routes[route].tag);
-
     document.title = routes[route].title;
     history.pushState(null, null, link);
+
+    outlet.setAttribute('route', routes[route].tag);
 };

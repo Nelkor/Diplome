@@ -1,4 +1,4 @@
-import { styles, elements } from '../templates/main.js';
+import { styles, elements } from '../templates/list.js';
 import { go } from '../services/router-service.js';
 
 import {
