@@ -4,6 +4,7 @@ const selected_books = [];
 
 export const add_selected_books = id => selected_books.push(id);
 export const clear_selection = () => selected_books.length = 0;
+export const get_selection = () => selected_books;
 
 export const get_books_stock = async () => {
     // const res = await get('get_books_stock');

@@ -54,8 +54,9 @@ export const get_client = async id => {
         id: 76345,
         fio: 'Иванов Пётр Максимович',
         passport: '4010 456123',
+        address: 'Пушкина Колотушкина',
         phone: '+7 123 456 78-90',
-        books: 100500,
+        count: 100500,
     };
 };
 
