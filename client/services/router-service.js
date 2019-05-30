@@ -30,10 +30,12 @@ let outlet = null;
 export const set_outlet = el => outlet = el;
 
 export const go = link => {
-    if ( ! routes[link]) link = '/books';
+    let route = link.split('#')[0];
 
-    outlet.setAttribute('route', routes[link].tag);
+    if ( ! routes[route]) link = route = '/books';
 
-    document.title = routes[link].title;
+    outlet.setAttribute('route', routes[route].tag);
+
+    document.title = routes[route].title;
     history.pushState(null, null, link);
 };

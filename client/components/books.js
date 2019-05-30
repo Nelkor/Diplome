@@ -5,7 +5,6 @@ import {
     get_books_stock,
     get_books_filter,
     rm_book,
-    set_selected_book,
 } from '../services/books-service.js';
 
 const template =
@@ -184,8 +183,8 @@ export default class Books extends HTMLElement
                     book_list.removeChild(el);
                 });
             } else if (e.path[1].classList.contains('book')) {
-                set_selected_book(e.path[1].dataset.book_id);
-                return go('/book');
+                const id = e.path[1].dataset.book_id;
+                return go(`/book#${id}`);
             }
         });
 
