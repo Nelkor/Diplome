@@ -1,12 +1,17 @@
 import { get, post, check_success } from './http-service.js';
 
+let selected_book = 0;
+
+export const set_selected_book = n => selected_book = n;
+export const get_selected_book = () => selected_book;
+
 export const get_books_stock = async () => {
     const res = await get('get_books_stock');
     return check_success(res);
 };
 
 export const get_books_filter = async filter => {
-    const res = await get('get_books_filter', filter);
+    const res = await get('get_books_filter', { filter });
     return check_success(res);
 };
 

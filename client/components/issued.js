@@ -26,6 +26,7 @@ export default class Issued extends HTMLElement
     {
         this.shadow_root.innerHTML = template;
 
+        const content = this.shadow_root.querySelector('#content');
         const link_books = this.shadow_root.querySelector('#link-books');
         const link_clients = this.shadow_root.querySelector('#link-clients');
         const link_issued = this.shadow_root.querySelector('#link-issued');

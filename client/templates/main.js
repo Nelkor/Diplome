@@ -1,5 +1,10 @@
 export const styles =
 `
+* {
+    user-select: none;
+    box-sizing: border-box;
+}
+
 .wrapper {
     width: 1200px;
     height: 900px;
