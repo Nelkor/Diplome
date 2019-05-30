@@ -1,5 +1,6 @@
 export const styles =
 `
+/*<style>*/
 * {
     user-select: none;
     box-sizing: border-box;
@@ -29,6 +30,60 @@ export const styles =
 .content {
     width: 1200px;
     height: 800px;
+}
+
+.search {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.search > * { height: 100%; margin-right: 10px }
+.search input { padding-left: 10px; width: 400px }
+.search button { width: 120px }
+
+.titles {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: #777;
+}
+
+.item {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.item:hover {
+    background-color: #cfeada;
+}
+
+.item > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list {
+    width: 100%;
+    height: 700px;
+    overflow-y: scroll;
+}
+
+.id {
+    width: 75px;
+    text-align: right;
+}
+
+.rm-item {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: maroon;
 }
 `;
 

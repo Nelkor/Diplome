@@ -5,6 +5,7 @@ import Auth from './components/auth.js';
 import Books from './components/books.js';
 import Book from './components/book.js';
 import Clients from './components/clients.js';
+import Client from './components/client.js';
 import Issued from './components/issued.js';
 
 customElements.define('router-outlet', RouterOutlet);
@@ -12,6 +13,7 @@ customElements.define('ath-auth', Auth);
 customElements.define('ath-books', Books);
 customElements.define('ath-book', Book);
 customElements.define('ath-clients', Clients);
+customElements.define('ath-client', Client);
 customElements.define('ath-issued', Issued);
 
 const init = () => {

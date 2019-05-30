@@ -23,51 +23,23 @@ export const get = async (route, params) => {
     addr += '?';
     addr += query_arr.join('&');
 
-    // const raw = await fetch(addr);
-    //
-    // return await raw.json();
+    const raw = await fetch(addr);
 
-    return {
-        success: true,
-        content: [
-            {
-                id: 1,
-                author: '1234',
-                name: 'Lorem ipsum dolor',
-                isbn: '1234-5678-1234-7654',
-                publisher: 'Publisher',
-                series: 'Series',
-                status: 'В наличии',
-            },
-            {
-                id: 2186,
-                author: '1234',
-                name: 'Lorem ipsum dolor',
-                isbn: '1234-5678-1234-7654',
-                publisher: 'Publisher',
-                series: 'Series',
-                status: 'В наличии',
-            },
-        ],
-    };
+    return await raw.json();
 };
 
 export const post = async (route, params) => {
     params = params || {};
     params.token = get_token();
 
-    // const raw = await fetch(domain + route, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(params),
-    // });
-    //
-    // return await raw.json();
+    const raw = await fetch(domain + route, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params),
+    });
 
-    return {
-        success: true,
-    };
+    return await raw.json();
 };
