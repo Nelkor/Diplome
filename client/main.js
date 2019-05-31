@@ -20,7 +20,7 @@ const init = () => {
     const outlet = document.querySelector('#router');
 
     set_outlet(outlet);
-    go(location.pathname);
+    go(location.pathname + location.hash);
 };
 
 document.addEventListener('DOMContentLoaded', init);

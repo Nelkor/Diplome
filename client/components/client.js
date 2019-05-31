@@ -18,7 +18,7 @@ const template =
 `
 <style>
     ${styles}
-    
+
     .green { color: green }
     .red { color: maroon }
 
