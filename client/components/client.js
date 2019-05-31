@@ -1,4 +1,4 @@
-import { styles } from '../templates/item.js';
+import { styles, client } from '../templates/item.js';
 import { go } from '../services/router-service.js';
 import { books_by_ids, clear_selection } from '../services/books-service.js';
 
@@ -72,22 +72,7 @@ const template =
     <div class="content">
         <div class="client">
             <p class="id">№ <span id="client-id"></span></p>
-            <div class="line">
-                <div class="label">ФИО</div>
-                <input id="fio" type="text" placeholder="ФИО">
-            </div>
-            <div class="line">
-                <div class="label">Паспорт</div>
-                <input id="passport" type="text" placeholder="Серия и номер паспорта">
-            </div>
-            <div class="line">
-                <div class="label">Адрес</div>
-                <input id="address" type="text" placeholder="Адрес">
-            </div>
-            <div class="line">
-                <div class="label">Номер телефона</div>
-                <input id="phone" type="text" placeholder="Номер телефона">
-            </div>
+            ${client}
             <p class="count">Книг на руках: <span id="count"></span></p>
             <button id="save">Сохранить</button>
         </div>

@@ -90,6 +90,7 @@ export default class Clients extends HTMLElement
         link_clients.classList.add('active');
         link_books.addEventListener('click', () => go('/books'));
         link_issued.addEventListener('click', () => go('/issued'));
+        new_client_btn.addEventListener('click', () => go('/add-client'));
 
         list.addEventListener('click', e => {
             if (e.path[0].classList.contains('rm-item')) {

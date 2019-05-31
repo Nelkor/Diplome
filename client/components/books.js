@@ -104,6 +104,7 @@ export default class Books extends HTMLElement
         link_books.classList.add('active');
         link_clients.addEventListener('click', () => go('/clients'));
         link_issued.addEventListener('click', () => go('/issued'));
+        new_book_btn.addEventListener('click', () => go('/add-book'));
 
         list.addEventListener('click', e => {
             if (e.path[0].classList.contains('rm-item')) {

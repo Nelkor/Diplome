@@ -23,6 +23,14 @@ const routes = {
         tag: 'ath-issued',
         title: 'Выдано',
     },
+    '/add-book': {
+        tag: 'ath-add-book',
+        title: 'Новая книга',
+    },
+    '/add-client': {
+        tag: 'ath-add-client',
+        title: 'Новая книга',
+    },
 };
 
 let outlet = null;
