@@ -1,6 +1,7 @@
 import { styles, elements } from '../templates/list.js';
 import { go } from '../services/router-service.js';
 import { get_issued } from '../services/issued-service.js';
+import { make_el, make_titles, fill } from '../templates/html.js';
 
 const template =
 `
@@ -22,27 +23,6 @@ const template =
 ${elements}
 `;
 
-const make_el = (class_name, content) => { // TODO HTML-TEMPLATE
-    const el = document.createElement('div');
-
-    el.className = class_name;
-
-    if (content) el.innerHTML = content;
-
-    return el;
-};
-
-const make_titles = () => { // TODO HTML-TEMPLATE
-    const t = make_el('titles');
-
-    t.appendChild(make_el('id', 'НОМЕР'));
-    t.appendChild(make_el('book', 'КНИГА'));
-    t.appendChild(make_el('client', 'ЧИТАТЕЛЬ'));
-    t.appendChild(make_el('limit', 'СРОК'));
-
-    return t;
-};
-
 const make_issue = issue => {
     const i = make_el(`item`);
     const lc = issue.good ? 'green' : 'red';
@@ -55,13 +35,6 @@ const make_issue = issue => {
     i.dataset.client_id = issue.client_id;
 
     return i;
-};
-
-const fill = (issues, ctx) => { // TODO HTML-TEMPLATE
-    const elements = issues.map(make_issue);
-
-    ctx.innerHTML = '';
-    elements.forEach(el => ctx.appendChild(el));
 };
 
 export default class Issued extends HTMLElement
@@ -81,7 +54,13 @@ export default class Issued extends HTMLElement
         const link_clients = this.shadow_root.querySelector('#link-clients');
         const link_issued = this.shadow_root.querySelector('#link-issued');
 
-        const titles = make_titles();
+        const titles = make_titles({
+            id: 'НОМЕР',
+            book: 'КНИГА',
+            client: 'ЧИТАТЕЛЬ',
+            limit: 'СРОК',
+        });
+
         const list = make_el('list');
 
         content.appendChild(titles);
@@ -97,6 +76,6 @@ export default class Issued extends HTMLElement
             if (id) go(`/client#${id}`);
         });
 
-        get_issued().then(issued => fill(issued, list));
+        get_issued().then(issued => fill(issued, make_issue, list));
     }
 }

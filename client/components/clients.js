@@ -1,5 +1,6 @@
 import { styles, elements } from '../templates/list.js';
 import { go } from '../services/router-service.js';
+import { make_el, make_titles, fill } from '../templates/html.js';
 
 import {
     get_clients,
@@ -21,29 +22,6 @@ const template =
 ${elements}
 `;
 
-const make_el = (class_name, content) => {
-    const el = document.createElement('div');
-
-    el.className = class_name;
-
-    if (content) el.innerHTML = content;
-
-    return el;
-};
-
-const make_titles = () => {
-    const t = make_el('titles');
-
-    t.appendChild(make_el('id', 'НОМЕР'));
-    t.appendChild(make_el('fio', 'ФИО'));
-    t.appendChild(make_el('passport', 'ПАСПОРТ'));
-    t.appendChild(make_el('address', 'АДРЕС'));
-    t.appendChild(make_el('phone', 'НОМЕР ТЕЛЕФОНА'));
-    t.appendChild(make_el('books', 'КНИГ НА РУКАХ'));
-
-    return t;
-};
-
 const make_client = client => {
     const c = make_el(`item client-${client.id}`);
 
@@ -64,13 +42,6 @@ const make_client = client => {
     return c;
 };
 
-const fill = (clients, ctx) => {
-    const elements = clients.map(make_client);
-
-    ctx.innerHTML = '';
-    elements.forEach(el => ctx.appendChild(el));
-};
-
 export default class Clients extends HTMLElement
 {
     constructor()
@@ -88,8 +59,16 @@ export default class Clients extends HTMLElement
         const link_clients = this.shadow_root.querySelector('#link-clients');
         const link_issued = this.shadow_root.querySelector('#link-issued');
 
+        const titles = make_titles({
+            id: 'НОМЕР',
+            fio: 'ФАМИЛИЯ ИМЯ ОТЧЕСТВО',
+            passport: 'ПАСПОРТ',
+            address: 'АДРЕС',
+            phone: 'НОМЕР ТЕЛЕФОНА',
+            books: 'КНИГ НА РУКАХ',
+        });
+
         const search = make_el('search');
-        const titles = make_titles();
         const list = make_el('list');
 
         const search_input = document.createElement('input');
@@ -133,6 +112,6 @@ export default class Clients extends HTMLElement
             fill(books, list);
         });
 
-        get_clients().then(clients => fill(clients, list));
+        get_clients().then(clients => fill(clients, make_client, list));
     }
 }

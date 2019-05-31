@@ -1,5 +1,6 @@
 import { styles, elements } from '../templates/list.js';
 import { go } from '../services/router-service.js';
+import { make_el, make_titles, fill } from '../templates/html.js';
 
 import {
     get_books_stock,
@@ -33,30 +34,6 @@ const template =
 ${elements}
 `;
 
-const make_el = (class_name, content) => {
-    const el = document.createElement('div');
-
-    el.className = class_name;
-
-    if (content) el.innerHTML = content;
-
-    return el;
-};
-
-const make_titles = () => {
-    const t = make_el('titles');
-
-    t.appendChild(make_el('id', 'НОМЕР'));
-    t.appendChild(make_el('author', 'АВТОР'));
-    t.appendChild(make_el('name', 'НАЗВАНИЕ'));
-    t.appendChild(make_el('isbn', 'ISBN'));
-    t.appendChild(make_el('publisher', 'ИЗДАТЕЛЬСТВО'));
-    t.appendChild(make_el('series', 'СЕРИЯ'));
-    t.appendChild(make_el('status', 'СТАТУС'));
-
-    return t;
-};
-
 const make_book = book => {
     const b = make_el(`item book-${book.id}`);
 
@@ -78,13 +55,6 @@ const make_book = book => {
     return b;
 };
 
-const fill = (books, ctx) => {
-    const elements = books.map(make_book);
-
-    ctx.innerHTML = '';
-    elements.forEach(el => ctx.appendChild(el));
-};
-
 export default class Books extends HTMLElement
 {
     constructor()
@@ -102,8 +72,17 @@ export default class Books extends HTMLElement
         const link_clients = this.shadow_root.querySelector('#link-clients');
         const link_issued = this.shadow_root.querySelector('#link-issued');
 
+        const titles = make_titles({
+            id: 'НОМЕР',
+            author: 'АВТОР',
+            name: 'НАЗВАНИЕ',
+            isbn: 'ISBN',
+            publisher: 'ИЗДАТЕЛЬСТВО',
+            series: 'СЕРИЯ',
+            status: 'СТАТУС',
+        });
+
         const search = make_el('search');
-        const titles = make_titles();
         const list = make_el('list');
 
         const search_input = document.createElement('input');
@@ -147,6 +126,6 @@ export default class Books extends HTMLElement
             fill(books, list);
         });
 
-        get_books_stock().then(books => fill(books, list));
+        get_books_stock().then(books => fill(books, make_book, list));
     }
 }
