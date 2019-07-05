@@ -1,0 +1,42 @@
+server {
+  listen 80;
+
+  server_name nelkor.ru;
+
+  root /var/www/artem/www;
+
+  index index.html;
+
+  error_log /var/www/artem/log/www.error.log;
+  access_log /var/www/artem/log/www.access.log;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+
+server {
+  listen 80;
+  server_name www.nelkor.ru;
+  return 301 $scheme://nelkor.ru$request_uri;
+}
+
+server {
+  listen 80;
+
+  server_name api.nelkor.ru;
+
+  root /var/www/artem/api;
+
+  error_log /var/www/artem/log/api.error.log;
+  access_log /var/www/artem/log/api.access.log;
+
+  location / {
+    add_header 'Access-Control-Allow-Origin' 'http://nelkor.ru';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST';
+    add_header 'Access-Control-Allow-Headers' 'Content-Type';
+    include fastcgi_params;
+    fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+  }
+}
